@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f5f7fb">
+    <title>Ruang Mutu — Monitoring Pendidikan Lombok Timur</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main id="login-screen" class="login-screen">
+      <section class="login-art" aria-label="Informasi aplikasi">
+        <div class="brand brand-light"><span class="brand-mark">Rm.</span><span class="brand-name">ruang<span class="brand-accent">mutu</span><small>Pembinaan SMP</small></span></div>
+        <div class="login-art-copy">
+          <span class="eyebrow">PUSAT DATA PENDIDIKAN DAERAH</span>
+          <h1>Setiap sekolah<br>punya cerita.</h1>
+          <p>Ubah data menjadi arah. Pantau mutu sekolah, temukan sinyal lebih awal, dan dampingi setiap langkah kemajuan.</p>
+        </div>
+        <div class="login-art-bottom"><span class="pulse-dot"></span> Memantau sekolah di seluruh kabupaten</div>
+        <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
+      </section>
+      <section class="login-panel">
+        <div class="login-box">
+          <div class="brand brand-mobile"><span class="brand-mark">Rm.</span><span class="brand-name">ruang<span class="brand-accent">mutu</span><small>Pembinaan SMP</small></span></div>
+          <span class="eyebrow">SELAMAT DATANG KEMBALI</span>
+          <h2>Masuk ke dashboard</h2>
+          <p class="muted">Gunakan akun dinas pendidikan Anda untuk melanjutkan.</p>
+          <form id="login-form">
+            <label for="login-email">Email dinas</label>
+            <input id="login-email" type="email" placeholder="nama@disdik.go.id" autocomplete="username" required>
+            <label for="login-password">Kata sandi</label>
+            <input id="login-password" type="password" placeholder="Masukkan kata sandi" autocomplete="current-password" required>
+            <p id="login-error" class="form-error" role="alert"></p>
+            <button class="button button-primary login-button" type="submit">Masuk ke dashboard <span>→</span></button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <main id="app-screen" class="app-shell hidden">
+      <aside class="sidebar" id="sidebar">
+        <a class="brand sidebar-brand" href="#" aria-label="Ruang Mutu Pembinaan SMP"><span class="brand-mark">Rm.</span><span class="brand-name">ruang<span class="brand-accent">mutu</span><small>Pembinaan SMP</small></span></a>
+        <div class="workspace-label">WORKSPACE</div>
+        <div class="district-switch"><span class="district-icon">⌖</span><span><strong>Kabupaten Lombok Timur</strong><small>Dinas Pendidikan dan Kebudayaan</small></span><span class="switch-chevron">⌄</span></div>
+        <nav class="side-nav" aria-label="Navigasi utama">
+          <span class="nav-section">MENU UTAMA</span>
+          <a class="nav-link active" href="#overview" data-label="Ringkasan"><span class="nav-icon">▦</span>Ringkasan<span class="nav-active-mark"></span></a>
+          <a class="nav-link" href="#schools" data-label="Data sekolah"><span class="nav-icon">▤</span>Data sekolah<span class="nav-count" id="nav-school-count">—</span></a>
+          <div class="nav-group">
+            <a class="nav-link" href="#students" data-label="Peserta didik"><span class="nav-icon">◫</span>Peserta didik</a>
+            <div class="nav-submenu" aria-label="Submenu Peserta didik">
+              <a class="nav-sub-link" href="#students" data-label="SPMB">SPMB</a>
+              <a class="nav-sub-link" href="#students-tka" data-label="TKA">TKA</a>
+            </div>
+          </div>
+          <a class="nav-link" href="#facilities" data-label="Data Sarpras"><span class="nav-icon">◈</span>Data Sarpras</a>
+          <a class="nav-link" href="#alerts" data-label="Sinyal peringatan"><span class="nav-icon">◉</span>Sinyal peringatan<span class="nav-notification" id="nav-alert-count">0</span></a>
+          <a class="nav-link" href="#insights" data-label="Analisis & rekomendasi"><span class="nav-icon">✳</span>Analisis &amp; rekomendasi</a>
+          <span class="nav-section nav-section-spaced">PREFERENSI</span>
+          <a class="nav-link" href="#schools" data-label="Pengaturan data"><span class="nav-icon">⚙</span>Pengaturan data</a>
+        </nav>
+        <div class="sidebar-spacer"></div>
+        <details class="sidebar-help">
+          <summary><span class="help-icon">?</span><span class="sidebar-help-label">Hubungi tim pengelola</span><span class="help-arrow">↗</span></summary>
+          <strong class="sidebar-help-contact">Hood Zamani</strong>
+        </details>
+        <div class="user-profile"><div class="avatar" id="user-avatar">KD</div><div class="user-meta"><strong id="user-name">Kepala Dinas</strong><small id="user-role">Kepala Dinas</small></div><button id="logout-button" class="logout-button" aria-label="Keluar" title="Keluar">↪</button></div>
+      </aside>
+      <button id="sidebar-backdrop" class="sidebar-backdrop" type="button" aria-label="Tutup navigasi" tabindex="-1"></button>
+
+      <section class="main-area">
+        <header class="topbar">
+          <button id="mobile-menu" class="icon-button mobile-menu" aria-label="Buka navigasi" aria-expanded="false" aria-controls="sidebar">☰</button>
+          <div class="breadcrumbs">Dashboard <span>/</span> <strong id="current-section-label">Ringkasan</strong></div>
+          <div class="topbar-actions"><div class="live-status"><span class="pulse-dot"></span><span>Data terkini</span><span class="live-separator">·</span><span id="last-updated">—</span></div><button id="refresh-button" class="icon-button refresh-button" title="Perbarui data" aria-label="Perbarui data">↻</button><div class="topbar-divider"></div><button class="top-avatar" title="Profil pengguna" id="top-avatar">KD</button></div>
+        </header>
+
+        <div class="page-content">
+          <div class="data-notice"><span class="notice-icon">i</span><span><strong>Data profil sekolah.</strong> Daftar sekolah, identitas kepala sekolah, dan sumber daya tahunan berasal dari berkas yang dimuat. Skor mutu, tren, risiko, dan prediksi hanya tersedia setelah data penilaian dimasukkan.</span><div class="notice-actions"><button class="button button-outline template-download-button" id="import-data-button" type="button" title="Hanya admin kabupaten yang dapat mengimpor data"><span class="download-icon">↑</span> Import File</button><input id="import-data-file" type="file" accept=".csv,text/csv" hidden><div class="download-menu"><button class="button button-outline template-download-button" id="download-data-button" type="button" aria-haspopup="menu" aria-expanded="false"><span class="download-icon">↓</span> Unduh Data</button><div class="download-menu-options" id="download-data-options" role="menu" hidden><button type="button" role="menuitem" data-export-format="xlsx">Unduh XLSX</button><button type="button" role="menuitem" data-export-format="csv">Unduh CSV</button><button type="button" role="menuitem" data-export-format="pdf">Unduh PDF / Cetak</button></div></div></div></div>
+          <section class="page-heading" id="overview">
+            <div><div class="date-label" id="today-label">RINGKASAN KABUPATEN LOMBOK TIMUR</div><h1>Selamat pagi, <span id="greeting-name">Kepala Dinas</span> <span class="wave">✦</span></h1><p>Pemantauan profil dan perkembangan SMP di Kabupaten Lombok Timur, Nusa Tenggara Barat.</p></div>
+            <div class="heading-controls"><label class="sr-only" for="year-filter">Pilih tahun penilaian</label><select id="year-filter" class="select-control"><option value="2026">Tahun 2026</option><option value="2027">Tahun 2027</option><option value="2028">Tahun 2028</option><option value="2029">Tahun 2029</option><option value="2030">Tahun 2030</option></select></div>
+          </section>
+
+          <section class="kpi-grid" aria-label="Indikator utama">
+            <article class="kpi-card kpi-card--blue"><div class="kpi-top"><span class="kpi-label">Sekolah terdaftar</span><span class="kpi-icon kpi-blue">▤</span></div><div class="kpi-value" id="kpi-total">—</div><div class="kpi-foot"><span class="kpi-note" id="kpi-assessed">— dinilai</span><span class="kpi-plain" id="kpi-districts">— kecamatan</span></div></article>
+            <article class="kpi-card kpi-card--green"><div class="kpi-top"><span class="kpi-label">Sekolah unggul</span><span class="kpi-icon kpi-green">✳</span></div><div class="kpi-value" id="kpi-excellent">—</div><div class="kpi-foot"><span class="trend-up" id="kpi-excellent-change">↑ —</span><span class="kpi-note">mutu ≥ 80</span></div><div class="kpi-accent accent-green"></div></article>
+            <article class="kpi-card kpi-card--purple"><div class="kpi-top"><span class="kpi-label">Sedang berkembang</span><span class="kpi-icon kpi-purple">↗</span></div><div class="kpi-value" id="kpi-growing">—</div><div class="kpi-foot"><span class="trend-up">●</span><span class="kpi-note">tren positif</span></div></article>
+            <article class="kpi-card kpi-card--amber"><div class="kpi-top"><span class="kpi-label">Sekolah stagnan</span><span class="kpi-icon kpi-amber">⌁</span></div><div class="kpi-value" id="kpi-stagnant">—</div><div class="kpi-foot"><span class="trend-neutral">●</span><span class="kpi-note">mutu relatif stabil</span></div></article>
+            <article class="kpi-card kpi-card--red"><div class="kpi-top"><span class="kpi-label">Sekolah menurun</span><span class="kpi-icon kpi-red">↘</span></div><div class="kpi-value" id="kpi-declining">—</div><div class="kpi-foot"><span class="trend-down">● Perlu perhatian</span><span class="kpi-note">tren 5 tahun</span></div></article>
+            <article class="kpi-card kpi-card--danger kpi-priority"><div class="kpi-top"><span class="kpi-label">Prioritas pembinaan</span><span class="kpi-icon kpi-red">!</span></div><div class="kpi-value" id="kpi-priority">—</div><div class="kpi-foot"><span class="trend-down">● Tindak lanjut</span><span class="kpi-note">risiko tinggi</span></div><div class="kpi-accent accent-red"></div></article>
+          </section>
+
+          <section class="analytics-grid">
+            <article class="panel trend-panel">
+              <div class="panel-heading"><div><div class="section-kicker">GAMBARAN MUTU</div><h2>Perjalanan pendidikan</h2><p>Indeks mutu dan hasil belajar per tahun, 2026–2030.</p></div><span class="period-control" aria-label="Rentang tahun 2026 sampai 2030">2026–2030</span></div>
+              <div class="chart-legend"><span><i class="legend-dot legend-indigo"></i>Indeks mutu</span><span><i class="legend-dot legend-mint"></i>Hasil belajar</span><span class="chart-years">Indeks per tahun</span></div>
+              <div class="chart-wrap"><div class="y-axis-labels"><span>100</span><span>80</span><span>60</span><span>40</span><span>20</span></div><div class="line-chart" id="trend-chart" role="img" aria-label="Grafik indeks mutu dan hasil belajar per tahun dari 2026 sampai 2030"></div></div>
+              <div class="trend-year-values" id="trend-year-values" aria-label="Indeks mutu per tahun"></div>
+              <div class="chart-footnote"><span class="insight-dot"></span><span id="trend-footnote">Memuat analisis tren...</span></div>
+            </article>
+            <article class="panel map-panel">
+              <div class="panel-heading"><div><div class="section-kicker">SEBARAN WILAYAH</div><h2>Peta mutu sekolah</h2><p>Lokasi dan capaian per kecamatan.</p></div><button class="more-button" aria-label="Pilihan lain">···</button></div>
+              <div class="map-content"><div class="district-map" id="district-map" role="img" aria-label="Peta sebaran mutu sekolah per kecamatan"><svg viewBox="0 0 310 204" aria-hidden="true"><path class="map-land" d="M92 12 128 22 161 17 183 38 217 40 226 66 257 79 250 111 271 131 244 151 232 181 195 177 171 195 140 178 107 190 92 166 62 155 68 123 46 99 62 71 52 50 79 37Z"/><path class="map-boundary" d="m60 72 38 11 15-46m1 46 21 41-24 66m24-66 59 10 29-78m-88 68 18 42m-18-42 68 10 40-28m-40 28-4 54m4-54 31 39m-31-39-41-46m41 46 2-59"/></svg></div><div class="map-legend"><span><i class="legend-dot legend-green"></i>Unggul</span><span><i class="legend-dot legend-amber"></i>Perlu perhatian</span><span><i class="legend-dot legend-red"></i>Prioritas</span></div></div>
+              <div class="map-footer"><div><span class="footer-label">Rerata kabupaten</span><strong id="map-average">—<small>/100</small></strong></div><div class="map-footer-divider"></div><div><span class="footer-label">Kecamatan terbaik</span><strong id="map-best-district">—</strong></div><button class="arrow-circle" aria-label="Lihat kecamatan">↗</button></div>
+            </article>
+          </section>
+
+          <section class="lower-grid">
+            <article class="panel ranking-panel">
+              <div class="panel-heading"><div><div class="section-kicker">CAPAIAN WILAYAH</div><h2>Peringkat kecamatan</h2></div><a class="subtle-link" href="#schools">Lihat sekolah <span>→</span></a></div>
+              <div class="ranking-list" id="district-rankings"><div class="loading-line"></div><div class="loading-line"></div><div class="loading-line"></div></div>
+              <div class="ranking-foot"><span class="rank-caption">Berdasarkan indeks mutu sekolah</span><span class="rank-year">Tahun 2026</span></div>
+            </article>
+            <article class="panel insight-panel" id="insights">
+              <div class="panel-heading"><div><div class="section-kicker">INTELIJEN PEMBINAAN</div><h2>Temuan &amp; rekomendasi</h2></div><span class="ai-badge"><span>✦</span> ANALITIK</span></div>
+              <div class="insight-summary"><span class="summary-icon">✧</span><p id="insight-summary">Mengolah data indikator sekolah...</p></div>
+              <div class="recommendations" id="recommendations"></div>
+              <button id="show-priority-button" class="recommendation-link">Lihat sekolah prioritas <span>→</span></button>
+            </article>
+          </section>
+
+          <section class="panel district-stats-panel" id="district-statistics">
+            <div class="panel-heading"><div><div class="section-kicker">SEBARAN SEKOLAH &amp; SUMBER DAYA</div><h2>Ringkasan per kecamatan</h2><p>Jumlah sekolah negeri/swasta serta siswa, rombel, guru, dan tenaga kependidikan.</p></div><span class="data-year-badge" id="district-data-year">Tahun 2026</span></div>
+            <div class="resource-summary">
+              <article class="resource-card"><span class="resource-icon resource-blue">▤</span><div><span>SMP Negeri</span><strong id="total-public-schools">—</strong></div></article>
+              <article class="resource-card"><span class="resource-icon resource-violet">▤</span><div><span>SMP Swasta</span><strong id="total-private-schools">—</strong></div></article>
+              <article class="resource-card"><span class="resource-icon resource-green">♙</span><div><span>Jumlah siswa</span><strong id="total-students">—</strong></div></article>
+              <article class="resource-card"><span class="resource-icon resource-amber">▦</span><div><span>Jumlah rombel</span><strong id="total-classrooms">—</strong></div></article>
+              <article class="resource-card"><span class="resource-icon resource-violet">♧</span><div><span>Jumlah guru</span><strong id="total-teachers">—</strong></div></article>
+              <article class="resource-card"><span class="resource-icon resource-blue">♧</span><div><span>Tenaga kependidikan</span><strong id="total-education-staff">—</strong></div></article>
+            </div>
+            <div class="resource-coverage" id="resource-coverage">Jumlah siswa, rombel, guru, dan tenaga kependidikan hanya menjumlahkan sekolah yang mengirimkan data pada tahun terpilih.</div>
+            <div class="table-scroll district-table-scroll"><table class="district-stats-table"><thead><tr><th>KECAMATAN</th><th>JUMLAH SEKOLAH</th><th>NEGERI</th><th>SWASTA</th><th>SISWA</th><th>ROMBEL</th><th>GURU</th><th>TENAGA KEPENDIDIKAN</th><th>RERATA MUTU</th></tr></thead><tbody id="district-stats-body"><tr><td colspan="9" class="table-empty">Memuat ringkasan kecamatan...</td></tr></tbody></table></div>
+          </section>
+
+          <section class="panel resource-page-panel" id="students" aria-labelledby="students-title">
+            <div class="students-page-heading"><div class="panel-heading"><div><div class="section-kicker">DATA PESERTA DIDIK · PEMANTAUAN SPMB</div><h2 id="students-title">Perjalanan penerimaan murid baru</h2><p>Pendaftar, penerimaan per jalur, dan rombongan belajar pada tahun ajaran terpilih.</p></div></div><button class="button button-primary button-small" id="open-spmb-button" type="button">＋ Input data SPMB</button></div>
+            <div class="student-period-control"><label for="spmb-period-filter">Tahun ajaran</label><select id="spmb-period-filter" class="filter-select"><option value="">Memuat periode...</option></select></div>
+            <div class="resource-summary resource-page-summary">
+              <article class="resource-card"><span class="resource-icon resource-green">♙</span><div><span>Total pendaftar</span><strong id="spmb-total-applicants">—</strong></div></article>
+              <article class="resource-card"><span class="resource-icon resource-blue">✓</span><div><span>Total diterima</span><strong id="spmb-total-accepted">—</strong></div></article>
+              <article class="resource-card"><span class="resource-icon resource-amber">▦</span><div><span>Total rombel</span><strong id="spmb-total-rombel">—</strong></div></article>
+              <article class="resource-card"><span class="resource-icon resource-violet">▤</span><div><span>Sekolah mengirim data</span><strong id="spmb-school-coverage">—</strong></div></article>
+            </div>
+            <p class="resource-coverage">Data dicatat per sekolah dan tahun ajaran. Jumlah diterima merupakan penjumlahan empat jalur; setiap angka mengikuti data yang dimasukkan oleh sekolah.</p>
+            <div class="table-scroll resource-page-table spmb-table"><table><thead><tr><th>NPSN</th><th>SATUAN PENDIDIKAN</th><th>SISWA KELAS 7</th><th>SISWA KELAS 8</th><th>SISWA KELAS 9</th><th>PENDAFTAR KESELURUHAN</th><th>PENDAFTAR PRESTASI</th><th>PENDAFTAR AFIRMASI</th><th>PENDAFTAR ZONASI</th><th>PENDAFTAR MUTASI</th><th>DITERIMA PRESTASI</th><th>DITERIMA AFIRMASI</th><th>DITERIMA ZONASI</th><th>DITERIMA MUTASI</th><th>JUMLAH ROMBEL</th></tr></thead><tbody id="student-page-body"><tr><td colspan="15" class="table-empty">Memuat data SPMB...</td></tr></tbody></table></div>
+          </section>
+
+          <section class="panel resource-page-panel" id="students-tka" aria-labelledby="students-tka-title">
+            <div class="students-page-heading"><div class="panel-heading"><div><div class="section-kicker">DATA PESERTA DIDIK · HASIL TKA</div><h2 id="students-tka-title">Hasil TKA</h2><p>Daftar hasil asesmen peserta didik yang telah mengikuti TKA.</p></div></div></div>
+            <div class="tka-kpi-grid">
+              <article class="tka-kpi-card tka-kpi-card-blue">
+                <div class="tka-kpi-header">
+                  <span class="tka-kpi-label">TOP 10 MATEMATIKA</span>
+                  <span class="tka-kpi-badge">#1</span>
+                </div>
+                <div class="tka-kpi-list">
+                  <button type="button" class="tka-kpi-item" data-school="SMP Negeri 2 Masbagik" data-subject="matematika"><span class="tka-kpi-student"><span>1. Rina Sari</span><small>SMP Negeri 2 Masbagik</small></span><strong>92</strong></button>
+                  <button type="button" class="tka-kpi-item" data-school="SMP Negeri 1 Selong" data-subject="matematika"><span class="tka-kpi-student"><span>2. Putri Ayu</span><small>SMP Negeri 1 Selong</small></span><strong>91</strong></button>
+                  <button type="button" class="tka-kpi-item" data-school="SMP Negeri 1 Selong" data-subject="matematika"><span class="tka-kpi-student"><span>3. Andi Rahman</span><small>SMP Negeri 1 Selong</small></span><strong>88</strong></button>
+                  <button type="button" class="tka-kpi-item" data-school="SMP Negeri 3 Pringgabaya" data-subject="matematika"><span class="tka-kpi-student"><span>4. Fajar Hidayat</span><small>SMP Negeri 3 Pringgabaya</small></span><strong>84</strong></button>
+                  <button type="button" class="tka-kpi-item" data-school="SMP Negeri 2 Masbagik" data-subject="matematika"><span class="tka-kpi-student"><span>5. Sinta Dewi</span><small>SMP Negeri 2 Masbagik</small></span><strong>83</strong></button>
+                </div>
+              </article>
+              <article class="tka-kpi-card tka-kpi-card-green">
+                <div class="tka-kpi-header">
+                  <span class="tka-kpi-label">TOP 10 BAHASA INDONESIA</span>
+                  <span class="tka-kpi-badge">#1</span>
+                </div>
+                <div class="tka-kpi-list">
+                  <button type="button" class="tka-kpi-item" data-school="SMP Negeri 1 Selong" data-subject="bahasa-indonesia"><span class="tka-kpi-student"><span>1. Andi Rahman</span><small>SMP Negeri 1 Selong</small></span><strong>90</strong></button>
+                  <button type="button" class="tka-kpi-item" data-school="SMP Negeri 1 Selong" data-subject="bahasa-indonesia"><span class="tka-kpi-student"><span>2. Putri Ayu</span><small>SMP Negeri 1 Selong</small></span><strong>91</strong></button>
+                  <button type="button" class="tka-kpi-item" data-school="SMP Negeri 3 Pringgabaya" data-subject="bahasa-indonesia"><span class="tka-kpi-student"><span>3. Fajar Hidayat</span><small>SMP Negeri 3 Pringgabaya</small></span><strong>89</strong></button>
+                  <button type="button" class="tka-kpi-item" data-school="SMP Negeri 2 Masbagik" data-subject="bahasa-indonesia"><span class="tka-kpi-student"><span>4. Rina Sari</span><small>SMP Negeri 2 Masbagik</small></span><strong>87</strong></button>
+                  <button type="button" class="tka-kpi-item" data-school="SMP Negeri 1 Selong" data-subject="bahasa-indonesia"><span class="tka-kpi-student"><span>5. Laila Nur</span><small>SMP Negeri 1 Selong</small></span><strong>86</strong></button>
+                </div>
+              </article>
+            </div>
+            <div class="tka-toolbar">
+              <label class="tka-district-filter" for="tka-district-filter">Kecamatan
+                <select id="tka-district-filter"><option value="">Semua Kecamatan</option></select>
+              </label>
+              <div class="tka-toolbar-actions">
+                <button id="tka-toggle-data" class="button button-outline button-small" type="button" aria-controls="tka-table-section" aria-expanded="false">Lihat Data</button>
+                <div class="download-menu tka-menu">
+                  <button id="tka-download-button" class="button button-outline button-small" type="button" aria-haspopup="menu" aria-expanded="false">
+                    <span class="download-icon">↓</span> Unduh
+                  </button>
+                  <div class="download-menu-options" id="tka-download-options" role="menu" hidden>
+                    <button type="button" role="menuitem" data-export-format="excel">Excel</button>
+                    <button type="button" role="menuitem" data-export-format="pdf">PDF</button>
+                    <button type="button" role="menuitem" data-export-format="template-csv">Template CSV Hasil TKA</button>
+                  </div>
+                </div>
+                <div class="download-menu tka-menu">
+                  <button id="tka-import-button" class="button button-outline button-small" type="button" aria-haspopup="menu" aria-expanded="false" disabled>
+                    <span class="download-icon">↑</span> Impor data
+                  </button>
+                  <div class="download-menu-options" id="tka-import-options" role="menu" hidden>
+                    <button type="button" role="menuitem" data-import-format="excel">Excel (.xlsx)</button>
+                    <button type="button" role="menuitem" data-import-format="csv">CSV (.csv)</button>
+                    <button type="button" role="menuitem" data-import-format="pdf">PDF</button>
+                  </div>
+                </div>
+                <input id="tka-import-file" type="file" accept=".xlsx,.pdf" hidden>
+              </div>
+            </div>
+            <div class="tka-table-wrap" id="tka-table-section" hidden>
+              <table class="tka-table">
+                <thead>
+                  <tr>
+                    <th>Nama Sekolah</th>
+                    <th>Jenjang</th>
+                    <th>Tahun TKA</th>
+                    <th>Status</th>
+                    <th>Kecamatan</th>
+                    <th>Nomor Peserta</th>
+                    <th>NISN</th>
+                    <th>Nama Peserta</th>
+                    <th>Tempat, Tanggal Lahir</th>
+                    <th>Nilai Matematika</th>
+                    <th>Nilai Bahasa Indonesia</th>
+                  </tr>
+                </thead>
+                <tbody id="tka-results-body">
+                  <tr><td colspan="11" class="table-empty">Memuat hasil TKA...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="panel resource-page-panel" id="facilities" aria-labelledby="facilities-title">
+            <div class="students-page-heading"><div class="panel-heading"><div><div class="section-kicker">DATA SARANA &amp; PRASARANA</div><h2 id="facilities-title">Data sarpras sekolah</h2><p>Jumlah ruang dan fasilitas sekolah pada tahun yang dipilih.</p></div><span class="data-year-badge resource-page-year"></span></div><div class="facilities-actions"><div class="download-menu facilities-download-menu" id="facilities-download-menu"><button class="button button-outline button-small" id="facilities-download-button" type="button" aria-haspopup="menu" aria-expanded="false"><span class="download-icon">↓</span> Unduh Data</button><div class="download-menu-options" id="facilities-download-options" role="menu" hidden><button type="button" role="menuitem" data-facilities-export-format="xlsx">Unduh Excel (.xlsx)</button><button type="button" role="menuitem" data-facilities-export-format="pdf">Unduh PDF / Cetak</button></div></div><button class="button button-outline button-small" id="open-facility-damage-button" type="button">＋ Input tingkat kerusakan</button><button class="button button-primary button-small" id="open-facilities-button" type="button">＋ Input data sarpras</button></div></div>
+            <div class="resource-summary resource-page-summary">
+              <article class="resource-card"><span class="resource-icon resource-blue">▤</span><div><span>Sekolah dengan data sarpras</span><strong id="facilities-page-coverage">—</strong></div></article>
+              <article class="resource-card"><span class="resource-icon resource-amber">▦</span><div><span>Total rombel</span><strong id="facilities-page-classrooms">—</strong></div></article>
+              <article class="resource-card"><span class="resource-icon resource-violet">⌂</span><div><span>Total toilet</span><strong id="facilities-page-toilets">—</strong></div></article>
+              <button class="resource-card facility-ratio-card" id="facility-toilet-ratio-card" type="button" data-ratio-filter="toilet" aria-pressed="false"><span class="resource-icon resource-amber">!</span><div><span>Sekolah kurang rasio toilet</span><strong id="facility-toilet-ratio-count">—</strong><small>1 toilet per 30 siswa · klik untuk melihat</small></div></button>
+              <button class="resource-card facility-ratio-card" id="facility-classroom-ratio-card" type="button" data-ratio-filter="classroom" aria-pressed="false"><span class="resource-icon resource-amber">!</span><div><span>Sekolah kurang rasio rombel</span><strong id="facility-classroom-ratio-count">—</strong><small>1 rombel per 35 siswa · klik untuk melihat</small></div></button>
+              <article class="resource-card"><span class="resource-icon resource-amber">!</span><div><span>Unit rusak berat</span><strong id="facilities-page-severe">—</strong></div></article>
+              <article class="resource-card"><span class="resource-icon resource-amber">!</span><div><span>Unit rusak sedang</span><strong id="facilities-page-moderate">—</strong></div></article>
+              <article class="resource-card"><span class="resource-icon resource-blue">◉</span><div><span>Sekolah dinilai kerusakannya</span><strong id="facilities-page-damage-coverage">—</strong></div></article>
+            </div>
+            <p class="resource-coverage">Rasio dihitung dari jumlah siswa dan sarpras pada tahun terpilih; sekolah tanpa data jumlah siswa tahun tersebut tidak masuk perhitungan. Prioritas kerusakan diurutkan berdasarkan jumlah unit rusak berat, lalu rusak sedang dan ringan. Kondisi yang belum dinilai tidak diasumsikan baik.</p>
+            <div class="resource-coverage facility-ratio-filter-status" id="facility-ratio-filter-status" aria-live="polite"></div>
+            <div class="table-scroll resource-page-table facilities-table"><table><thead><tr><th>NAMA SEKOLAH</th><th>NPSN</th><th>KECAMATAN</th><th>STATUS</th><th>SISWA</th><th>ROMBEL</th><th>RASIO ROMBEL (≤35 SISWA)</th><th>RASIO TOILET (≤30 SISWA)</th><th>PRIORITAS KERUSAKAN</th><th>RUANG GURU</th><th>RUANG KEPALA SEKOLAH</th><th>PERPUSTAKAAN</th><th>LAB IPA</th><th>LAB TIK</th><th>TOILET</th></tr></thead><tbody id="facilities-page-body"><tr><td colspan="15" class="table-empty">Memuat data sarpras...</td></tr></tbody></table></div>
+          </section>
+
+          <section class="panel alert-panel" id="alerts">
+            <div class="panel-heading"><div><div class="section-kicker">EARLY WARNING SYSTEM</div><h2>Sinyal yang perlu ditindaklanjuti</h2><p>Deteksi otomatis perubahan indikator yang memerlukan perhatian.</p></div><span class="alert-total" id="alert-total">0 sinyal</span></div>
+            <div class="alert-list" id="alert-list"><div class="alert-empty">Memeriksa indikator sekolah...</div></div>
+          </section>
+
+          <section class="panel schools-panel" id="schools">
+            <div class="schools-header"><div class="panel-heading"><div><div class="section-kicker">MONITORING SEKOLAH</div><h2>Perkembangan sekolah</h2><p>Profil sekolah beserta jumlah siswa, rombel, GTK, indeks mutu, risiko, dan arah perubahan jika datanya tersedia.</p></div></div><div class="schools-header-actions"><button class="button button-outline button-small hidden" id="open-attendance-button" type="button">↻ Kehadiran triwulan</button><button class="button button-primary button-small hidden" id="open-assessment-button" type="button">＋ Input penilaian</button><button class="button button-outline button-small" id="all-schools-export"><span class="download-icon">↓</span> Unduh CSV</button></div></div>
+            <div class="table-toolbar"><div class="search-wrap"><span>⌕</span><input id="school-search" type="search" placeholder="Cari nama atau kode sekolah..." aria-label="Cari nama atau kode sekolah"></div><div class="filter-group"><label for="district-filter">Kecamatan:</label><select id="district-filter" class="filter-select"><option value="">Semua kecamatan</option></select><label for="status-filter">Status:</label><select id="status-filter" class="filter-select"><option value="">Semua status</option><option value="Negeri">Negeri</option><option value="Swasta">Swasta</option></select><label for="trend-filter">Tren:</label><select id="trend-filter" class="filter-select"><option value="">Semua tren</option><option value="Sangat Meningkat">Sangat meningkat</option><option value="Meningkat">Meningkat</option><option value="Stabil">Stabil</option><option value="Menurun">Menurun</option><option value="Sangat Menurun">Sangat menurun</option></select></div></div>
+            <div class="table-scroll"><table><thead><tr><th>DAFTAR SEKOLAH</th><th>KEPALA SEKOLAH</th><th>AKREDITASI</th><th>KECAMATAN</th><th>STATUS</th><th>SISWA</th><th>ROMBEL</th><th>GURU</th><th>TENAGA KEPENDIDIKAN</th><th>INDEKS MUTU <span class="sort-arrow">↓</span></th><th>PERUBAHAN</th><th>TREN 5 THN</th><th>RISIKO</th><th></th></tr></thead><tbody id="schools-table-body"><tr><td colspan="14" class="table-empty">Memuat data sekolah...</td></tr></tbody></table></div>
+            <div class="table-footer"><span id="school-count-label">Menampilkan — sekolah</span><button id="load-more-button" class="text-button">Tampilkan semua sekolah <span>→</span></button></div>
+          </section>
+          <footer class="page-footer"><span>© 2026 Ruang Mutu <span>·</span> Pemetaan Kabupaten Lombok Timur</span><span><i class="pulse-dot"></i></span></footer>
+        </div>
+      </section>
+    </main>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <dialog id="school-dialog" class="school-dialog"><div id="school-dialog-content"></div></dialog>
+    <dialog id="spmb-dialog" class="assessment-dialog spmb-dialog">
+      <form id="spmb-form" class="assessment-form">
+        <div class="dialog-header"><div><div class="section-kicker">PESERTA DIDIK · SPMB</div><h2>Input data SPMB</h2><p>Masukkan jumlah pendaftar dan murid yang diterima untuk setiap jalur.</p></div><button class="dialog-close" type="button" data-close-spmb aria-label="Tutup">×</button></div>
+        <div class="dialog-body">
+          <div class="assessment-meta-grid">
+            <label>NPSN
+              <select name="school_id" id="spmb-school" required></select>
+            </label>
+            <label>Tahun ajaran
+              <input name="school_year" id="spmb-school-year" type="text" inputmode="numeric" pattern="[0-9]{4}/[0-9]{4}" placeholder="2026/2027" maxlength="9" required>
+            </label>
+            <label class="spmb-school-name">Satuan Pendidikan
+              <input id="spmb-school-name" type="text" readonly>
+            </label>
+          </div>
+          <h3 class="assessment-section-title">Jumlah siswa dan rombel</h3>
+          <div class="assessment-metric-grid spmb-metric-grid">
+            <label>Jumlah rombel<input name="rombel_count" type="number" min="0" max="5000" step="1" required></label>
+            <label>Jumlah siswa kelas 7<input name="students_grade_7" type="number" min="0" max="100000" step="1" required></label>
+            <label>Jumlah siswa kelas 8<input name="students_grade_8" type="number" min="0" max="100000" step="1" required></label>
+            <label>Jumlah siswa kelas 9<input name="students_grade_9" type="number" min="0" max="100000" step="1" required></label>
+            <label>Jumlah pendaftar secara keseluruhan<input name="applicants_total" type="number" min="0" max="100000" step="1" required></label>
+          </div>
+          <h3 class="assessment-section-title">Jumlah pendaftar per jalur</h3>
+          <div class="assessment-metric-grid spmb-metric-grid">
+            <label>Jalur prestasi<input name="applicants_prestasi" type="number" min="0" max="100000" step="1" required></label>
+            <label>Jalur afirmasi<input name="applicants_afirmasi" type="number" min="0" max="100000" step="1" required></label>
+            <label>Jalur zonasi<input name="applicants_zonasi" type="number" min="0" max="100000" step="1" required></label>
+            <label>Jalur mutasi<input name="applicants_mutasi" type="number" min="0" max="100000" step="1" required></label>
+          </div>
+          <h3 class="assessment-section-title">Jumlah pendaftar yang diterima per jalur</h3>
+          <div class="assessment-metric-grid spmb-metric-grid">
+            <label>Jalur prestasi<input name="accepted_prestasi" type="number" min="0" max="100000" step="1" required></label>
+            <label>Jalur afirmasi<input name="accepted_afirmasi" type="number" min="0" max="100000" step="1" required></label>
+            <label>Jalur zonasi<input name="accepted_zonasi" type="number" min="0" max="100000" step="1" required></label>
+            <label>Jalur mutasi<input name="accepted_mutasi" type="number" min="0" max="100000" step="1" required></label>
+          </div>
+          <div class="assessment-form-actions"><button class="button button-outline" type="button" data-close-spmb>Batal</button><button class="button button-primary" type="submit">Simpan data SPMB</button></div>
+        </div>
+      </form>
+    </dialog>
+    <dialog id="facilities-dialog" class="assessment-dialog facilities-dialog">
+      <form id="facilities-form" class="assessment-form">
+        <div class="dialog-header"><div><div class="section-kicker">DATA SARANA &amp; PRASARANA</div><h2>Input data sarpras</h2><p>Masukkan jumlah ruang, rombel, perpustakaan, laboratorium, dan toilet.</p></div><button class="dialog-close" type="button" data-close-facilities aria-label="Tutup">×</button></div>
+        <div class="dialog-body">
+          <div class="assessment-meta-grid facilities-meta-grid">
+            <label>Nama Sekolah
+              <select name="school_id" id="facilities-school" required></select>
+            </label>
+            <label>NPSN
+              <input id="facilities-npsn" type="text" readonly>
+            </label>
+            <label>Satuan Pendidikan
+              <input id="facilities-school-name" type="text" readonly>
+            </label>
+            <label>Kecamatan
+              <input id="facilities-district" type="text" readonly>
+            </label>
+            <label>Status
+              <input id="facilities-status" type="text" readonly>
+            </label>
+            <label>Tahun data
+              <input id="facilities-year" type="text" readonly>
+            </label>
+          </div>
+          <h3 class="assessment-section-title">Jumlah rombel dan sarana prasarana</h3>
+          <div class="assessment-metric-grid facilities-metric-grid">
+            <label>Rombel<input name="rombel_count" type="number" min="0" max="5000" step="1" required></label>
+            <label>Ruang Guru<input name="teacher_room_count" type="number" min="0" max="10000" step="1" required></label>
+            <label>Ruang Kepala Sekolah<input name="principal_room_count" type="number" min="0" max="10000" step="1" required></label>
+            <label>Perpustakaan<input name="library_count" type="number" min="0" max="10000" step="1" required></label>
+            <label>Lab IPA<input name="science_lab_count" type="number" min="0" max="10000" step="1" required></label>
+            <label>Lab TIK<input name="computer_lab_count" type="number" min="0" max="10000" step="1" required></label>
+            <label>Toilet<input name="toilet_count" type="number" min="0" max="10000" step="1" required></label>
+          </div>
+          <div class="assessment-form-actions"><button class="button button-outline" type="button" data-close-facilities>Batal</button><button class="button button-primary" type="submit">Simpan data sarpras</button></div>
+        </div>
+      </form>
+    </dialog>
+    <dialog id="facility-damage-dialog" class="assessment-dialog facilities-dialog">
+      <form id="facility-damage-form" class="assessment-form">
+        <div class="dialog-header"><div><div class="section-kicker">PRIORITAS SARANA &amp; PRASARANA</div><h2>Input tingkat kerusakan</h2><p>Catat jumlah unit per kondisi untuk membantu melihat sekolah yang perlu diprioritaskan.</p></div><button class="dialog-close" type="button" data-close-facility-damage aria-label="Tutup">×</button></div>
+        <div class="dialog-body">
+          <div class="assessment-meta-grid facilities-meta-grid">
+            <label>Nama Sekolah<select name="school_id" id="facility-damage-school" required></select></label>
+            <label>Tahun data<input id="facility-damage-year" type="text" readonly></label>
+          </div>
+          <p class="facility-damage-warning" id="facility-damage-warning"></p>
+          <div class="facility-damage-fields" id="facility-damage-fields"></div>
+          <div class="assessment-form-actions"><button class="button button-outline" type="button" data-close-facility-damage>Batal</button><button class="button button-primary" type="submit">Simpan tingkat kerusakan</button></div>
+        </div>
+      </form>
+    </dialog>
+    <dialog id="assessment-dialog" class="assessment-dialog">
+      <form id="assessment-form" class="assessment-form">
+        <div class="dialog-header"><div><div class="section-kicker">PENILAIAN SEKOLAH</div><h2>Catat hasil evaluasi</h2><p>Skor indikator 0–100 harus didukung bukti dan rubrik yang disepakati.</p></div><button class="dialog-close" type="button" data-close-assessment aria-label="Tutup">×</button></div>
+        <div class="dialog-body">
+          <div class="assessment-meta-grid">
+            <label>Sekolah yang belum dinilai
+              <select name="school_id" id="assessment-school" required></select>
+            </label>
+            <div class="assessment-year"><span>Tahun penilaian</span><strong id="assessment-year"></strong><small>Ubah tahun dari filter dashboard.</small></div>
+          </div>
+          <div class="assessment-note">Masukkan semua skor indikator. Nilai kehadiran, literasi, numerasi, serapan BOSP, dan putus sekolah digunakan untuk analisis tren serta peringatan dini.</div>
+          <h3 class="assessment-section-title">Kehadiran guru dan siswa per triwulan</h3>
+          <div class="attendance-quarter-fields" id="assessment-attendance-fields"></div>
+          <div class="attendance-average" id="assessment-attendance-average">Rata-rata: guru — · siswa —</div>
+          <p class="attendance-help">Rata-rata dihitung dari triwulan yang sudah diisi. Data dapat diperbarui setiap triwulan melalui tombol Kehadiran triwulan.</p>
+          <h3 class="assessment-section-title">Indikator operasional</h3>
+          <div class="assessment-metric-grid">
+            <label>Serapan BOSP (%)<input name="bosp_absorption" type="number" min="0" max="100" step="0.1" required></label>
+            <label>Literasi (0–100)<input name="literacy_score" type="number" min="0" max="100" step="0.1" required></label>
+            <label>Numerasi (0–100)<input name="numeracy_score" type="number" min="0" max="100" step="0.1" required></label>
+            <label>Angka putus sekolah (%)<input name="dropout_rate" type="number" min="0" max="100" step="0.1" required></label>
+          </div>
+          <h3 class="assessment-section-title">Sumber daya sekolah <span>(opsional)</span></h3>
+          <div class="assessment-metric-grid assessment-resource-grid">
+            <label>Jumlah siswa<input name="student_count" type="number" min="0" max="100000" step="1"></label>
+            <label>Jumlah rombel<input name="rombel_count" type="number" min="0" max="5000" step="1"></label>
+            <label>Jumlah guru<input name="teacher_count" type="number" min="0" max="20000" step="1"></label>
+            <label>Tenaga kependidikan<input name="education_staff_count" type="number" min="0" max="20000" step="1"></label>
+            <label>Jumlah prestasi<input name="achievement_count" type="number" min="0" max="10000" step="1" value="0"></label>
+          </div>
+          <h3 class="assessment-section-title">Skor indikator <span>52 indikator manual + rerata TKA otomatis · skala 0–100</span></h3>
+          <div id="assessment-indicators" class="assessment-indicators"><p>Memuat kamus indikator...</p></div>
+          <div class="assessment-form-actions"><button class="button button-outline" type="button" data-close-assessment>Batal</button><button class="button button-primary" type="submit">Simpan penilaian</button></div>
+        </div>
+      </form>
+    </dialog>
+    <dialog id="attendance-dialog" class="assessment-dialog attendance-dialog">
+      <form id="attendance-form" class="assessment-form">
+        <div class="dialog-header"><div><div class="section-kicker">PEMUTAKHIRAN DATA</div><h2>Kehadiran triwulan</h2><p>Perbarui kehadiran guru dan siswa setiap triwulan. Nilai tahunan dihitung dari triwulan yang terisi.</p></div><button class="dialog-close" type="button" data-close-attendance aria-label="Tutup">×</button></div>
+        <div class="dialog-body">
+          <div class="assessment-meta-grid">
+            <label>Sekolah yang sudah dinilai<select id="attendance-school" name="school_id" required></select></label>
+            <div class="assessment-year"><span>Tahun penilaian</span><strong id="attendance-year"></strong></div>
+          </div>
+          <div class="attendance-quarter-fields" id="attendance-update-fields"></div>
+          <div class="attendance-average" id="attendance-update-average">Rata-rata: guru — · siswa —</div>
+          <p class="attendance-help">Baris yang dikosongkan tidak mengubah data sebelumnya. Isi satu atau kedua nilai untuk triwulan yang diperbarui.</p>
+          <div class="assessment-form-actions"><button class="button button-outline" type="button" data-close-attendance>Batal</button><button class="button button-primary" type="submit">Simpan kehadiran</button></div>
+        </div>
+      </form>
+    </dialog>
+    <script src="app.js" defer></script>
+  </body>
+</html>
